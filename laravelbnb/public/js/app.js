@@ -2170,15 +2170,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["itemsInBasket"])), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(["itemsInBasket"])), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])({
     basket: function basket(state) {
       return state.basket.items;
     }
-  })), {}, {
-    success: function success() {
-      return !this.loading && 0 === this.itemsInBasket && this.bookingAttempted;
-    }
-  }),
+  })),
   methods: {
     book: function book() {
       var _this = this;
@@ -2191,8 +2187,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 _this.loading = true;
                 _this.bookingAttempted = false;
                 _this.errors = null;
-                _context.prev = 3;
-                _context.next = 6;
+                console.log("CUSTOMER: " + _this.customer);
+                _context.prev = 4;
+                _context.next = 7;
                 return axios.post("/api/checkout", {
                   customer: _this.customer,
                   bookings: _this.basket.map(function (basketItem) {
@@ -2204,27 +2201,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   })
                 });
 
-              case 6:
+              case 7:
                 _this.$store.dispatch("clearBasket");
 
-                _context.next = 12;
+                _context.next = 13;
                 break;
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](3);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](4);
                 _this.errors = _context.t0.response && _context.t0.response.data.errors;
 
-              case 12:
+              case 13:
                 _this.loading = false;
                 _this.bookingAttempted = true;
 
-              case 14:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 9]]);
+        }, _callee, null, [[4, 10]]);
       }))();
     }
   }
@@ -2488,7 +2485,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this = this;
 
     this.loading = true;
-    axios.get("/api/bookables/".concat(this.$route.params.id)).then(function (response) {
+    axios.get("/api/bookables/a").then(function (response) {
       _this.bookable = response.data.data;
       _this.loading = false;
     });
@@ -2704,6 +2701,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _BookableListItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookableListItem */ "./resources/js/bookables/BookableListItem.vue");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7563,7 +7565,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.warning[data-v-0d2ee2be] {\n  font-size: 0.7rem;\n}\n", ""]);
+exports.push([module.i, "\n.warning[data-v-0d2ee2be] {\n    font-size: 0.7rem;\n}\n", ""]);
 
 // exports
 
@@ -62668,7 +62670,7 @@ var render = function() {
                   attrs: { disabled: _vm.inBasketAlready },
                   on: { click: _vm.addToBasket }
                 },
-                [_vm._v("\n        Add to basket\n      ")]
+                [_vm._v("\n                Add to basket\n            ")]
               )
             : _vm._e()
         ]),
@@ -62681,14 +62683,14 @@ var render = function() {
                   staticClass: "btn btn-outline-secondary btn-block",
                   on: { click: _vm.removeFromBasket }
                 },
-                [_vm._v("\n        Remove from basket\n      ")]
+                [_vm._v("\n                Remove from basket\n            ")]
               )
             : _vm._e()
         ]),
         _vm._v(" "),
         _vm.inBasketAlready
           ? _c("div", { staticClass: "mt-4 text-muted warning" }, [
-              _vm._v("\n      This item is in basket already\n    ")
+              _vm._v("\n            This item is in basket already\n        ")
             ])
           : _vm._e()
       ],
@@ -62899,7 +62901,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _vm.loading
-      ? _c("div", [_vm._v("\n       Loading... \n    ")])
+      ? _c("div", [_vm._v("\n        Loading...\n    ")])
       : _c(
           "div",
           _vm._l(_vm.rows, function(row) {
@@ -81068,7 +81070,7 @@ __webpack_require__.r(__webpack_exports__);
       commit("removeFromBasket", payload);
       localStorage.setItem("basket", JSON.stringify(state.basket));
     },
-    clearBasket: function clearBasket(_ref3, payload) {
+    clearBasket: function clearBasket(_ref3) {
       var commit = _ref3.commit,
           state = _ref3.state;
       commit("setBasket", {

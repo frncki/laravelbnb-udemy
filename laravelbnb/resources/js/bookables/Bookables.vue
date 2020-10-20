@@ -1,17 +1,22 @@
 <template>
     <div>
         <div v-if="loading">
-           Loading... 
+            Loading...
         </div>
         <div v-else>
             <div class="row mb-4" v-for="row in rows" :key="'row ' + row">
-                <div 
-                class="col d-flex align-items-stretch"
-                v-for="(bookable, column) in bookablesInRow(row)"
-                :key="'row ' + row + column">
+                <div
+                    class="col d-flex align-items-stretch"
+                    v-for="(bookable, column) in bookablesInRow(row)"
+                    :key="'row ' + row + column"
+                >
                     <bookable-list-item v-bind="bookable"></bookable-list-item>
                 </div>
-                <div class="col" v-for="p in placeholdersInRow(row)" :key="'placeholder ' + row + p"></div>
+                <div
+                    class="col"
+                    v-for="p in placeholdersInRow(row)"
+                    :key="'placeholder ' + row + p"
+                ></div>
             </div>
         </div>
     </div>
@@ -22,12 +27,14 @@ import BookableListItem from "./BookableListItem";
 
 export default {
     components: {
-        BookableListItem,
+        BookableListItem
     },
 
     computed: {
         rows() {
-            return this.bookables === null ? 0 : Math.ceil(this.bookables.length / this.columns);
+            return this.bookables === null
+                ? 0
+                : Math.ceil(this.bookables.length / this.columns);
         }
     },
 
@@ -35,13 +42,16 @@ export default {
         return {
             bookables: null,
             loading: false,
-            columns: 3,
-        }
+            columns: 3
+        };
     },
 
     methods: {
         bookablesInRow(row) {
-            return this.bookables.slice((row - 1) * this.columns, row * this.columns);
+            return this.bookables.slice(
+                (row - 1) * this.columns,
+                row * this.columns
+            );
         },
 
         placeholdersInRow(row) {
@@ -56,7 +66,6 @@ export default {
             this.bookables = response.data.data;
             this.loading = false;
         });
-
-    },
+    }
 };
 </script>
