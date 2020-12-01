@@ -12,6 +12,7 @@ class CheckoutController extends Controller
 {
     public function __invoke(Request $request)
     {
+
         $data = $request->validate([
             'bookings' => 'required|array|min:1',
             'bookings.*.bookable_id' => 'required|exists:bookables,id',
@@ -29,7 +30,6 @@ class CheckoutController extends Controller
 
         $addressData = $data['customer'];
 
-
         $data = array_merge($request->validate([
             'bookings.*' => [
                 'required',
@@ -44,7 +44,6 @@ class CheckoutController extends Controller
         ]));
 
         $bookingsData = $data['bookings'];
-
 
         $bookings = collect($bookingsData)->map(function ($bookingData) use ($addressData) {
             $bookable = Bookable::findOrFail($bookingData['bookable_id']);

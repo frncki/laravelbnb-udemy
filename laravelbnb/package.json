@@ -27,6 +27,6 @@
         "@fortawesome/fontawesome-free": "^5.15.0",
         "moment": "^2.29.0",
         "vue-router": "^3.4.3",
-        "vuex": "^3.5.1"
+        "vuex": "^3.6.0"
     }
 }
